@@ -1,24 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Web Project</title>
-        <base href="/">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"></head>
-    <body>
-       <!-- <app-root></app-root>-->
-        
-        <a href="https://forte.kz?deeplink=forteapp://transfers?transferListType=NEW" class="btn btn-primary">?deeplink=forteapp://transfers?transferListType=NEW</a>
-        <a href="https://forte.kzm%3Fdeeplink%3Dforteapp%3A%2F%2Ftransfers%3FtransferListType%3DNEW" class="btn btn-primary">%3Fdeeplink%3Dforteapp%3A%2F%2Ftransfers%3FtransferListType%3DNEW</a>
-        <a href="https://forte.kz?deeplink=forteapp://accounts/open-my-accounts" class="btn btn-primary">forteapp://accounts/open-my-accounts</a>
-        <a href="https://forte.kz?deeplink=forteapp://bonus" class="btn btn-primary">forteapp://bonus</a>
-        <a href="https://forte.kz?deeplink=forteapp%3A%2F%2Fpayments%3FcategoryId%3D73ccb768-01db-426f-bb18-e29ee98cd615%26" class="btn btn-primary">?deeplink=forteapp%3A%2F%2Fpayments%3FcategoryId%3D73ccb768-01db-426f-bb18-e29ee98cd615%26</a>
-        <a href="https://forte.kz?deeplink=forteapp://serviceId=market" class="btn btn-primary">forteapp://serviceId=market</a>
-        <a href="https://forte-main-next.onedev.zone/_next/data/HSVpFlGTyCpy_M74eA9Lg/ru/cross-border.json?deeplink=forteapp%3A%2F%2Ftransfers%3FtransferListType%3DNEW" class="btn btn-primary">NEW</a>
-        <a href="https://forte-main-next.onedev.zone/_next/data/HSVpFlGTyCpy_M74eA9Lg/ru/cross-border.json?deeplink=forteapp%3A%2F%2Ftransfers%3FtransferListType%3DHISTORY" class="btn btn-primary">HISTORY</a>
-    <script src="runtime.js" type="module"></script><script src="polyfills.js" type="module"></script><script src="vendor.js" type="module"></script><script src="main.js" type="module"></script></body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Parameters Display</title>
+</head>
+<body>
+    <h2>Query Parameters</h2>
+    <div id="queryParams"></div>
+    <div id="lthsValue"></div>
+
+    <script>
+        // Функция для получения и отображения параметров запроса
+        function displayQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const queryParamsDiv = document.getElementById('queryParams');
+            const lthsValueDiv = document.getElementById('lthsValue');
+
+            // Отображаем все параметры запроса
+            params.forEach((value, key) => {
+                const p = document.createElement('p');
+                p.textContent = `${key}: ${value}`;
+                queryParamsDiv.appendChild(p);
+            });
+
+            // Отдельно отображаем значение для 'lths', если оно есть
+            if (params.has('lths')) {
+                const p = document.createElement('p');
+                p.textContent = `Value of 'lths': ${params.get('lths')}`;
+                lthsValueDiv.appendChild(p);
+            } else {
+                lthsValueDiv.textContent = "The 'lths' parameter is not present in the URL.";
+            }
+        }
+
+        // Вызываем функцию после загрузки страницы
+        window.onload = displayQueryParams;
+    </script>
+</body>
 </html>
